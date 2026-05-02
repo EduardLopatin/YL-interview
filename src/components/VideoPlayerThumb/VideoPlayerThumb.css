@@ -1,0 +1,6 @@
+.video-player-thumb {
+    width: 4px;
+    height: 18px;
+    border-radius: 1px;
+    background-color: var(--chapter-thumb-bg);
+}

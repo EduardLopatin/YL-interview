@@ -1,0 +1,14 @@
+.video-player-chapter {
+    cursor: pointer;
+    &:hover {
+        background-color: var(--chapter-hover-bg);
+    }
+    display: block;
+    width: 100%;
+    height: 4px;
+    background-color: #8b8ea4;
+    border-radius: 1px;
+    & > .hidden {
+        display: none;
+    }
+}
