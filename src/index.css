@@ -1,8 +1,13 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
+
 :root {
     --chapter-bg: #8b8ea4;
     --chapter-hover-bg: #76a4f9;
-    --chapter-active-bg: #f6f9ff;
+    --chapter-seen-bg: #f6f9ff;
     --chapter-thumb-bg: #f6f9ff;
+    --chapter-tooltip-bg: #1b1b1e;
+    --chapter-tooltip-text: #fff;
+    --chapter-tooltip-width: 279px;
 
     --text: #6b6375;
     --text-h: #08060d;

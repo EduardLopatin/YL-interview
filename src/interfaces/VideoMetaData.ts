@@ -7,5 +7,5 @@ export interface Chapter {
 export interface VideoMetaData {
   hlsPlaylistUrl: string;
   videoLength: number;
-  chapters: Chapter[];
+  chapters?: Chapter[];
 }

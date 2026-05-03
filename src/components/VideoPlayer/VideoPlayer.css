@@ -1,7 +1,11 @@
 .video-player-container {
-    border: 1px solid transparent;
-    border-radius: 10px;
-    overflow: hidden;
+    --controls-appearance-delay: 3s;
+    .border-wrapper {
+        border: 1px solid transparent;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
     video {
         display: block;
         width: 100%;
@@ -9,7 +13,23 @@
     }
 
     position: relative;
+
+    &:hover {
+        .controls {
+            visibility: visible;
+            opacity: 1;
+            transition:
+                visibility 0s 0s,
+                opacity 0.5s 0s;
+        }
+    }
+
     .controls {
+        visibility: hidden;
+        opacity: 0;
+        transition:
+            visibility 0s var(--controls-appearance-delay),
+            opacity 0.5s var(--controls-appearance-delay);
         margin: 0 14px;
         position: absolute;
         bottom: 0;

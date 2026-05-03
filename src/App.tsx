@@ -37,11 +37,7 @@ function App() {
   return (
     <>
       Player!!!
-      <VideoPlayer
-        hlsPlaylistUrl={TEST_INPUT.hlsPlaylistUrl}
-        videoLength={TEST_INPUT.videoLength}
-        chapters={TEST_INPUT.chapters}
-      />
+      <VideoPlayer data={TEST_INPUT} />
     </>
   );
 }

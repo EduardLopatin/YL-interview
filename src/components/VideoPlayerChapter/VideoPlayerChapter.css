@@ -1,14 +1,54 @@
 .video-player-chapter {
     cursor: pointer;
+    position: relative;
     &:hover {
-        background-color: var(--chapter-hover-bg);
+        background-color: var(--chapter-hover-bg) !important;
+        .seen {
+            background-color: var(--chapter-hover-bg);
+        }
+        .tooltip,
+        .tooltip::after {
+            display: block;
+        }
     }
-    display: block;
+    display: flex;
+    flex-direction: row;
     width: 100%;
     height: 4px;
     background-color: #8b8ea4;
     border-radius: 1px;
-    & > .hidden {
+    .tooltip {
+        font-family: "Rubik", sans-serif;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 16px;
+
         display: none;
+        position: absolute;
+        background-color: var(--chapter-tooltip-bg);
+        color: var(--chapter-tooltip-text);
+        border-radius: 6px;
+        padding: 8px;
+        transform: translate(-50%, calc(-100% - 26px));
+        top: 0;
+        left: 50%;
+        width: var(--chapter-tooltip-width);
+        height: auto;
+        &::after {
+            content: "";
+            position: absolute;
+
+            width: 10px;
+            height: 10px;
+            background-color: var(--chapter-tooltip-bg);
+
+            left: 50%;
+            bottom: -10px;
+            transform: translateX(-50%) translateY(-50%) rotate(45deg);
+        }
+    }
+    .seen {
+        background-color: var(--chapter-seen-bg);
+        transition: width 0.1s ease;
     }
 }

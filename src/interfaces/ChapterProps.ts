@@ -2,5 +2,6 @@ import type { Chapter } from "./VideoMetaData";
 
 export interface ChapterProps {
   chapter: Chapter;
-  active?: true;
+  currentTime: number;
+  active: boolean;
 }
