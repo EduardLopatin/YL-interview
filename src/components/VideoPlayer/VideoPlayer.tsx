@@ -1,12 +1,11 @@
-import React, { useCallback, useEffect, useRef } from "react";
-import type { VideoMetaData } from "../../interfaces/VideoMetaData";
-import VideoPlayerTimeline from "../VideoPlayerTimeline/VideoPlayerTimeline";
-import useHlsSource from "../../hooks/useHlsSource";
+import React, { useEffect } from "react";
+import { useShallow } from "zustand/shallow";
+
+import { VideoPlayerTimeline, VideoPlayerControls } from "../index";
+import type VideoPlayerProps from "../../interfaces/VideoPlayerProps";
 import usePlayerStore from "../../store/player.store";
 
 import "./VideoPlayer.css";
-import { useShallow } from "zustand/shallow";
-import type VideoPlayerProps from "../../interfaces/VideoPlayerProps";
 
 const VideoPlayer = ({ data }: VideoPlayerProps) => {
   const [setVideoElement, setCurrentTime, initState, dropState] =
@@ -38,9 +37,9 @@ const VideoPlayer = ({ data }: VideoPlayerProps) => {
           muted
         />
       </div>
-      <div className="controls">
+      <div className="panel">
         <VideoPlayerTimeline chapters={data?.chapters || null} />
-        <div style={{ height: "50px" }}>{/*play button placeholder*/}</div>
+        <VideoPlayerControls />
       </div>
     </div>
   );

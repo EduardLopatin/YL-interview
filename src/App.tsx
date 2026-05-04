@@ -36,7 +36,6 @@ const TEST_INPUT: VideoMetaData = {
 function App() {
   return (
     <>
-      Player!!!
       <VideoPlayer data={TEST_INPUT} />
     </>
   );

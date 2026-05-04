@@ -1,0 +1,47 @@
+.video-player-controls {
+    height: 31px;
+    margin: 12px 0;
+    padding: 5px 0;
+    display: flex;
+    justify-content: center;
+    .left-controls,
+    .right-controls {
+        display: flex;
+        gap: 20px;
+    }
+
+    .time-widget {
+        color: white;
+        align-self: center;
+    }
+
+    .quality-menu {
+        visibility: hidden;
+        opacity: 0;
+        display: inline-flex;
+        gap: 10px;
+        align-self: center;
+        transition:
+            opacity 0.3s ease-in-out,
+            visibility 0.3s;
+        &.show {
+            visibility: visible;
+            opacity: 1;
+        }
+        button {
+            border: none;
+            border-radius: 5px;
+            padding: 5px;
+            color: white;
+            font-size: 14px;
+            cursor: pointer;
+        }
+    }
+
+    & > * {
+        flex: 0 1 auto;
+    }
+    .divider {
+        flex-grow: 1;
+    }
+}

@@ -5,29 +5,36 @@ import type { VideoMetaData } from "../interfaces/VideoMetaData";
 import Hls from "hls.js";
 
 const usePlayerStore = create<PlayerState>((set, get) => ({
-  isPlaying: false,
+  isPlaying: true,
+  isMuted: true,
   chapters: null,
   currentChapter: 0,
   currentTime: 0,
   duration: 0,
+  levels: [],
+  currentLevel: -1,
 
   initState(data: Pick<VideoMetaData, "videoLength" | "chapters">) {
     set({
-      isPlaying: false,
+      isPlaying: true,
+      isMuted: true,
       currentChapter: 0,
       currentTime: 0,
       duration: data.videoLength || 0,
       chapters: data.chapters || null,
+      currentLevel: -1,
     });
   },
 
   dropState() {
     set({
-      isPlaying: false,
+      isPlaying: true,
+      isMuted: true,
       currentChapter: 0,
       currentTime: 0,
       duration: 0,
       chapters: null,
+      currentLevel: -1,
     });
   },
   setCurrentTime(time: number) {
@@ -71,7 +78,23 @@ const usePlayerStore = create<PlayerState>((set, get) => ({
       const hls = new Hls();
       hls.loadSource(url);
       hls.attachMedia(el);
-      set({ videoElement: el, hlsInstance: hls });
+
+      hls.on(Hls.Events.MANIFEST_PARSED, (event, data) => {
+        const availableLevels = data.levels.map((level, index) => ({
+          index: index,
+          label: level.height + "p",
+        }));
+
+        set({ levels: [{ index: -1, label: "Auto" }, ...availableLevels] });
+      });
+
+      set({
+        videoElement: el,
+        hlsInstance: hls,
+        isPlaying: el.autoplay,
+        isMuted: el.muted,
+        currentLevel: -1,
+      });
     } else {
       set({ videoElement: null, hlsInstance: null });
     }
@@ -83,11 +106,43 @@ const usePlayerStore = create<PlayerState>((set, get) => ({
   },
 
   play() {
+    const { videoElement } = get();
+
+    videoElement?.play();
+
     set({ isPlaying: true });
   },
 
   pause() {
+    const { videoElement } = get();
+
+    videoElement?.pause();
+
     set({ isPlaying: false });
+  },
+
+  mute() {
+    const { videoElement } = get();
+    if (videoElement) {
+      videoElement.muted = true;
+    }
+    set({ isMuted: true });
+  },
+
+  unmute() {
+    const { videoElement } = get();
+    if (videoElement) {
+      videoElement.muted = false;
+    }
+    set({ isMuted: false });
+  },
+
+  setCurrentLevel: (index: number) => {
+    const { hlsInstance } = get();
+    if (hlsInstance) {
+      hlsInstance.currentLevel = index;
+    }
+    set({ currentLevel: index });
   },
 }));
 

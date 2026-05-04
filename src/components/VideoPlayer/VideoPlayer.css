@@ -1,5 +1,5 @@
 .video-player-container {
-    --controls-appearance-delay: 3s;
+    --panel-appearance-delay: 3s;
     .border-wrapper {
         border: 1px solid transparent;
         border-radius: 10px;
@@ -15,7 +15,7 @@
     position: relative;
 
     &:hover {
-        .controls {
+        .panel {
             visibility: visible;
             opacity: 1;
             transition:
@@ -24,12 +24,13 @@
         }
     }
 
-    .controls {
-        visibility: hidden;
-        opacity: 0;
+    .panel {
+        /*visibility: hidden;*/
+        visibility: visible;
+        /*opacity: 0;*/
         transition:
-            visibility 0s var(--controls-appearance-delay),
-            opacity 0.5s var(--controls-appearance-delay);
+            visibility 0s var(--panel-appearance-delay),
+            opacity 0.5s var(--panel-appearance-delay);
         margin: 0 14px;
         position: absolute;
         bottom: 0;
